@@ -10,11 +10,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "raring-64-docker"
+  config.vm.box = "raring-64-docker-40GB"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://nitron-vagrant.s3-website-us-east-1.amazonaws.com/vagrant_ubuntu_12.04.3_amd64_virtualbox.box"
+  config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/ubuntu-12.04.3-amd64-vbox.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -48,7 +48,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   # Don't boot with headless mode
      vb.gui = true
   #   # Use VBoxManage to customize the VM. For example to change memory:
-     vb.customize ["modifyvm", :id, "--memory", "4024"]
+     vb.customize ["modifyvm", :id, "--memory", "4096"] #4GB by default, highly recomended to increase
+     config.vm.customize ["modifyvm", :id, "--cpus", 2] #2 cores
   end
   #
   # View the documentation for the provider you're using for more

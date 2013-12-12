@@ -19,6 +19,8 @@ else
 	echo "SERVICE_PASSWORD=1111" >> localrc
 	echo "ENABLED_SERVICES+=,savanna" >> localrc
 	chown stack:stack -R /opt/devstack
-	su - stack -c"bash /opt/devstack/stack.sh"	
+	su - stack -c"bash /opt/devstack/stack.sh"
+	docker build -t localhost:5042/openstack-savanna /vagrant/scripts/
+	docker push localhost:5042/openstack-savanna
 	touch /opt/openstack-installed
 fi
