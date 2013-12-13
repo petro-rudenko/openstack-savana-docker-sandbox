@@ -35,12 +35,13 @@ $ sudo su -
 Password: changeme
 ```
 
-* How to launch savanna HDP cluster:
-1) After launching VM go to savanna dashboard
-2) Register openstack-savanna:latest as image for HDP provider
-3) Create Nodegroup template (typical master/slave)
-4) Create Cluster template
-5) Launch cluster
+** How to launch savanna HDP cluster:
+
+* After launching VM go to savanna dashboard
+* Register openstack-savanna:latest as image for HDP provider
+* Create Nodegroup template (typical master/slave)
+* Create Cluster template
+* Launch cluster
 
 **TODO** After reboot VM savanna container doesn't register on docker-registry. Need to run:
 
