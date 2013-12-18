@@ -18,10 +18,8 @@ Vagrant VM with Openstack/Savanna/Docker
 
 ```
 # docker ps
-# mkdir /root/.ssh
-# cp /vagrant/scripts/ssh/* /root/.ssh/
-# chmod 600 /root/.ssh/id_rsa
 # ssh root@IP_FROM_DASHBOARD
+# Password: hadoop
 ```
 
 # How to launch savanna HDP cluster:

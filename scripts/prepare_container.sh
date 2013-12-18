@@ -11,8 +11,3 @@ cd /tmp/provisioners
 chmod +x * 
 ./init.sh; ./install-hdp1.3.sh; ./disable-repos.sh; ./install-jdk.sh; ./cleanup.sh; ./nozeroconf.sh; 
 cd ../; rm -rf /tmp/*;
-cd /root 
-wget http://dev2.hortonworks.com.s3.amazonaws.com/stuff/openstack/ssh.tar.gz
-tar xvf ssh.tar.gz 
-rm -f ssh.tar.gz 
-chmod 600 .ssh/id_rsa;
