@@ -9,5 +9,5 @@ wget http://dev2.hortonworks.com.s3.amazonaws.com/stuff/openstack/provisioners.t
 tar xvf provisioners.tar.gz 
 cd /tmp/provisioners 
 chmod +x * 
-./init.sh; ./install-hdp1.3.sh; ./disable-repos.sh; ./install-jdk.sh; ./cleanup.sh; ./nozeroconf.sh; 
+./init.sh; ./install-hdp1.3.sh; ./disable-repos.sh; ./install-jdk.sh; ./cleanup.sh; 
 cd ../; rm -rf /tmp/*;
