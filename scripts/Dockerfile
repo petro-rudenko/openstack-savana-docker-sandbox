@@ -6,5 +6,5 @@ RUN yum -y install openssh-server openssh-clients wget tar && cd /tmp && wget ht
 
 EXPOSE 22 80 8020 8080 9083 10000 11000 50070 50075 50111 
 #TODO: EXPOSE ALL PORTS FOR EVERY SERVICE
-CMD /etc/init.d/sshd start && /etc/init.d/ntpd start
+CMD ["/usr/sbin/sshd", "-D"]
 

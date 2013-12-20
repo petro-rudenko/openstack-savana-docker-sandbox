@@ -17,12 +17,14 @@ else
 	./tools/docker/install_docker.sh;
 	./tools/create-stack-user.sh
 	usermod -a -G docker stack
+	mkdir /var/log/openstack && chown stack:stack /var/log/openstack;
 	echo "VIRT_DRIVER=docker" > localrc
 	echo "ADMIN_PASSWORD=1111" >> localrc
 	echo "MYSQL_PASSWORD=1111" >> localrc
 	echo "RABBIT_PASSWORD=1111" >> localrc
 	echo "SERVICE_PASSWORD=1111" >> localrc
 	echo "ENABLED_SERVICES+=,savanna" >> localrc
+	echo "SCREEN_LOGDIR=/var/log/openstack" >> localrc
 	chown stack:stack -R /opt/devstack
 	su - stack -c"export PIP_DOWNLOAD_CACHE=/vagrant/.cache && bash /opt/devstack/stack.sh"
 	echo "export OS_USERNAME=admin" >> openrc
