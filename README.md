@@ -4,6 +4,10 @@ Vagrant VM with Openstack/Savanna/Docker
 
 ## How to install:
 * Install latest [Vagrant](http://www.vagrantup.com/) and Virtualbox
+* Install [vagrant-cachier](http://fgrehm.viewdocs.io/vagrant-cachier): 
+```
+vagrant plugin install vagrant-cachier
+```
 
 ```bash
    $ git clone https://github.com/petro-rudenko/openstack-savana-docker-sandbox && cd openstack-savana-docker-sandbox
