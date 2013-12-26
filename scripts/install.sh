@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[-f /opt/openstack-installed ]]; then
-	su - stack -c"bash /opt/devstack/stack.sh"
+	su - stack -c"bash /opt/devstack/rejoin-stack.sh"
 else
 	apt-get update;
 	cd /opt;
@@ -18,13 +18,7 @@ else
 	./tools/create-stack-user.sh
 	usermod -a -G docker stack
 	mkdir /var/log/openstack && chown stack:stack /var/log/openstack;
-	echo "VIRT_DRIVER=docker" > localrc
-	echo "ADMIN_PASSWORD=1111" >> localrc
-	echo "MYSQL_PASSWORD=1111" >> localrc
-	echo "RABBIT_PASSWORD=1111" >> localrc
-	echo "SERVICE_PASSWORD=1111" >> localrc
-	echo "ENABLED_SERVICES+=,savanna" >> localrc
-	echo "SCREEN_LOGDIR=/var/log/openstack" >> localrc
+	cp /vagrant/scripts/localrc /opt/devstack/localrc
 	chown stack:stack -R /opt/devstack
 	su - stack -c"export PIP_DOWNLOAD_CACHE=/vagrant/.cache && bash /opt/devstack/stack.sh"
 	echo "export OS_USERNAME=admin" >> openrc
@@ -32,7 +26,15 @@ else
 	echo "export OS_PASSWORD=1111" >> openrc
 	echo "export OS_AUTH_URL=http://127.0.0.1:35357/v2.0/" >> openrc
 	echo "export PS1='[\u@\h \W(keystone_admin)]\$ '" >> openrc
+	if [[ ! -r /vagrant/scrips/.cache/jdk-6u31-linux-x64.bin ]]; then
+		mkdir /vagrant/scrips/.cache;
+		wget -O /vagrant/scrips/.cache/jdk-6u31-linux-x64.bin https://s3.amazonaws.com/public-repo-1.hortonworks.com/ARTIFACTS/jdk-6u31-linux-x64.bin;
+	fi
 	docker build -t localhost:5042/openstack-savanna /vagrant/scripts/
 	docker push localhost:5042/openstack-savanna
+	su - stack -c"cd /opt/devstack && source openrc && nova keypair-add default > default.pem && chmod 600 default.pem"
+	#nova secgroup-add-rule default tcp 22 22 0.0.0.0/0 && nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+	su - stack -c"source /opt/devstack/openrc && nova-manage flavor create --name=master --cpu=2 --memory=2000 --flavor=98 --root_gb=10"
+	su - stack -c"source /opt/devstack/openrc && nova-manage flavor create --name=slave --cpu=1 --memory=750 --flavor=99 --root_gb=8"
 	touch /opt/openstack-installed
 fi
