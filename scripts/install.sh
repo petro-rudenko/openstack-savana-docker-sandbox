@@ -26,9 +26,9 @@ else
 	echo "export OS_PASSWORD=1111" >> openrc
 	echo "export OS_AUTH_URL=http://127.0.0.1:35357/v2.0/" >> openrc
 	echo "export PS1='[\u@\h \W(keystone_admin)]\$ '" >> openrc
-	if [[ ! -r /vagrant/scrips/.cache/jdk-6u31-linux-x64.bin ]]; then
-		mkdir /vagrant/scrips/.cache;
-		wget -O /vagrant/scrips/.cache/jdk-6u31-linux-x64.bin https://s3.amazonaws.com/public-repo-1.hortonworks.com/ARTIFACTS/jdk-6u31-linux-x64.bin;
+	if [[ ! -r /vagrant/scripts/.cache/jdk-6u31-linux-x64.bin ]]; then
+		mkdir /vagrant/scripts/.cache;
+		wget -O /vagrant/scripts/.cache/jdk-6u31-linux-x64.bin https://s3.amazonaws.com/public-repo-1.hortonworks.com/ARTIFACTS/jdk-6u31-linux-x64.bin;
 	fi
 	docker build -t localhost:5042/openstack-savanna /vagrant/scripts/
 	docker push localhost:5042/openstack-savanna
